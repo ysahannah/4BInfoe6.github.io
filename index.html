@@ -19,24 +19,15 @@
     embedded
     arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
     <a-assets>
-      <a-asset-item id="estate" src="assets/YzavhelsEstate.glb"></a-asset-item>
       <a-asset-item id="house" src="assets/House.glb"></a-asset-item>
     </a-assets>
 
     <!-- Defines the pattern marker that we are going to use. Notice that we are not providing the image file, but the  -->
 
     <!-- Defines the barcode marker that we are going to use. We have just to specify its code, that in this case is 1 -->
-    <a-marker type="barcode" value="1">
-      <a-entity
-        gltf-model="#estate"
-        scale="o.50 0.50 0.50"
-        position="0 0 0"
-        animation-mixer>
-      </a-entity>
-    </a-marker>
 
-    <a-marker type="barcode" value="0">
-      <a-entity gltf-model="#house" scale="2 2 2" animation-mixer> </a-entity>
+    <a-marker type="barcode" value="1">
+      <a-entity gltf-model="#house" scale="1 1 1" animation-mixer> </a-entity>
     </a-marker>
 
     <!-- Define the camera of the scene -->

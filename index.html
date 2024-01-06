@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@9b8609bd84a292ef97bf1e8589401ae0d3201280/dist/aframe-master.min.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Art</title>
 
-  <!-- we import arjs version without NFT but with marker + location based support -->
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
 
-  <body style="margin: 0px; overflow: hidden">
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+  </head>
+
+  <body>
     <a-scene embedded arjs>
-      <a-marker preset="hiro">
-        <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
-        <a-entity
-          position="0 0 0"
-          scale="0.05 0.05 0.05"
-          gltf-model="ARjs.glb"></a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
+      <a-entity scale=".2 .2 .2">
+        <a-entity gltf-model="ARjs.glb" scale=".5 .5 .5"></a-entity>
+      </a-entity>
+      <a-marker-camera preset="hiro"></a-marker-camera>
     </a-scene>
   </body>
 </html>

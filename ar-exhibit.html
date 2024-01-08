@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <!-- Initialize the viewport -->
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@9b8609bd84a292ef97bf1e8589401ae0d3201280/dist/aframe-master.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+</head>
+
+<body style="margin: 0px; overflow: hidden">
+  <!-- a-scene defines the scene that we are agoing to use. After arjs= there are various options that can be customized  -->
+  <!-- depending on your needs. For now just stick with these ones. -->
+  <!-- Notice that we have added a new detectionMode parameters and also a matrixCodeType one. -->
+  <!-- MatrixCodeType is 3x3 because we have created a 3x3 marker before using the online tool  -->
+  <a-scene
+    embedded
+    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+    <a-assets>
+      <a-asset-item id="estate" src="assets/Estate.glb"></a-asset-item>
+      <a-asset-item id="house" src="assets/House.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- Defines the pattern marker that we are going to use. Notice that we are not providing the image file, but the  -->
+
+    <!-- Defines the barcode marker that we are going to use. We have just to specify its code, that in this case is 1 -->
+    <a-marker type="barcode" value="1">
+      <a-entity
+        gltf-model="#estate"
+        scale=".5 .5 .5"
+        position="0 0 0"
+        animation-mixer>
+      </a-entity>
+    </a-marker>
+
+    <a-marker type="barcode" value="0">
+      <a-entity gltf-model="#house" scale="2 2 2" animation-mixer> </a-entity>
+    </a-marker>
+
+    <!-- Define the camera of the scene -->
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>

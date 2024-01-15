@@ -10,24 +10,35 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
-    window.onload = function() {
-        AFRAME.registerComponent('shoundhandler', {
-            init: function () {
-                var marker = this.el;
+    //To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
+var playing = false;
 
-                this.sound = document.querySelector("#svt");
+//HTML5 audio, will need user touch input to start on mobile
+var intro = new Audio("Airone/audio.mp3");
 
-                marker.addEventListener('markerFound', function () {
-                    this.sound.play();
-                }.bind(this));
-    
-        marker.addEventListener('markerLost', function() {
-            this.sound.pause();
-            this.sound.currentTime = 0;
-        }.bind(this));
-            }
-        });
-    };
+//Detect end of audio
+intro.addEventListener("ended", function() {
+	intro.currentTime = 0;
+	playing = false;
+});
+
+AFRAME.registerComponent('markerhandler', {
+	init: function() {
+		// Set up the tick throttling. Will check if marker is active every 500ms
+		this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
+	},
+	tick: function(t, dt) {
+		
+		if (document.querySelector("#barcode1").object3D.visible == true && playing == false) {
+			// MARKER IS PRESENT
+			intro.play();
+			playing = true;
+		} else {
+			// MARKER IS HIDDEN, do nothing (up to you)
+		}
+
+	}
+});
 </script>
 </head>
 
@@ -127,9 +138,8 @@
     </a-marker>
 
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
-    <a-marker type="barcode" value="1">
+    <a-marker markerhandler cursor="rayOrigin: mouse" emitevents="true" type="barcode" value="1" id="barcode1">
       <a-entity
-        sound="src: #svt"
         rotation="-90 0 0"
         position="0 0 0"
         gltf-model="#text"

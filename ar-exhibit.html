@@ -13,7 +13,7 @@
     AFRAME.registerComponent('soundhandler', {
         init: function () {
             this.soundEl = document.querySelector('[sound]');
-            this.marker = document.querySelector('a-marker');
+            this.marker = document.querySelector('#text-sound');
             this.visible = false;
         },
         tick: function () {
@@ -122,7 +122,7 @@
     </a-marker>
 
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
-    <a-marker cursor="rayOrigin: mouse" emitevents="true" type="barcode" value="1" id="text-sound">
+    <a-marker type="barcode" value="1" id="text-sound">
       <a-entity
         rotation="-90 0 0"
         position="0 0 0"

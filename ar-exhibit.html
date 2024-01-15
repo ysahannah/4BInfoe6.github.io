@@ -10,8 +10,7 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
-window.onload = function() {
-	AFRAME.registerComponent('soundhandler', {
+    AFRAME.registerComponent('soundhandler', {
         init: function () {
             this.soundEl = document.querySelector('[sound]');
             this.marker = document.querySelector('a-marker');
@@ -20,7 +19,7 @@ window.onload = function() {
         tick: function () {
 
             if (this.marker.object3D.visible && !this.visible) {
-                console.log("Playing sound")
+                console.log("ding")
                 this.soundEl.components.sound.stopSound(); // stop if playing
                 this.soundEl.components.sound.playSound(); // play
                 this.visible = true; // make sure it plays only once per visible
@@ -29,7 +28,6 @@ window.onload = function() {
             }
         }
     });
-};
 </script>
 </head>
 

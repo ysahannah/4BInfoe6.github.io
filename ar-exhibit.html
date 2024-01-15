@@ -20,10 +20,11 @@
 
             if (this.marker.object3D.visible && !this.visible) {
                 console.log("ding")
-                this.soundEl.components.sound.stopSound(); // stop if playing
+                //this.soundEl.components.sound.stopSound(); // stop if playing
                 this.soundEl.components.sound.playSound(); // play
                 this.visible = true; // make sure it plays only once per visible
             } else if (!this.marker.object3D.visible) {
+				this.soundEl.components.sound.pauseSound();
                 this.visible = false;
             }
         }

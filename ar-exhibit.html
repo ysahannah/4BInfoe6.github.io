@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
-    //To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
+//To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
 var playing = false;
 
 //HTML5 audio, will need user touch input to start on mobile
@@ -29,12 +29,14 @@ AFRAME.registerComponent('markerhandler', {
 	},
 	tick: function(t, dt) {
 		
-		if (document.querySelector("#barcode1").object3D.visible == true && playing == false) {
+		if (document.querySelector("#text-sound").object3D.visible == true && playing == false) {
 			// MARKER IS PRESENT
 			intro.play();
 			playing = true;
 		} else {
 			// MARKER IS HIDDEN, do nothing (up to you)
+			intro.pause();
+			playing = false;
 		}
 
 	}
@@ -138,7 +140,7 @@ AFRAME.registerComponent('markerhandler', {
     </a-marker>
 
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
-    <a-marker markerhandler cursor="rayOrigin: mouse" emitevents="true" type="barcode" value="1" id="barcode1">
+    <a-marker markerhandler cursor="rayOrigin: mouse" emitevents="true" type="barcode" value="1" id="text-sound">
       <a-entity
         rotation="-90 0 0"
         position="0 0 0"

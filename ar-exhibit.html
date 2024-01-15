@@ -10,37 +10,24 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
-//To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
-var playing = false;
+window.onload = function() {
+        AFRAME.registerComponent('soundhandler', {
+            init: function () {
+                var marker = this.el;
 
-//HTML5 audio, will need user touch input to start on mobile
-var intro = new Audio("Airone/audio.mp3");
+                this.sound = document.querySelector("#sound");
 
-//Detect end of audio
-intro.addEventListener("ended", function() {
-	intro.currentTime = 0;
-	playing = false;
-});
-
-AFRAME.registerComponent('markerhandler', {
-	init: function() {
-		// Set up the tick throttling. Will check if marker is active every 500ms
-		this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
-	},
-	tick: function(t, dt) {
-		
-		if (document.querySelector("#text-sound").object3D.visible == true && playing == false) {
-			// MARKER IS PRESENT
-			intro.play();
-			playing = true;
-		} else {
-			// MARKER IS HIDDEN, do nothing (up to you)
-			intro.pause();
-			playing = false;
-		}
-
-	}
-});
+                marker.addEventListener('markerFound', function () {
+                    this.sound.play();
+                }.bind(this));
+    
+        marker.addEventListener('markerLost', function() {
+            this.sound.pause();
+            this.sound.currentTime = 0;
+        }.bind(this));
+            }
+        });
+    };
 </script>
 </head>
 
@@ -72,12 +59,10 @@ AFRAME.registerComponent('markerhandler', {
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
     <a-assets>
       <a-asset-item id="text" src="Airone/asset/Model.glb"></a-asset-item>
-      <audio
-        id="svt"
-        src="Airone/audio.mp3"
-        autoplay="false"
-        loop="true"
-        preload="auto"></audio>
+      <a-asset-item src="Airone/audio.mp3"
+                preload="false" id="sound" response-type="arraybuffer" loop
+                crossorigin webkit-playsinline autoplay="false" playsinline>
+            </a-asset-item>
     </a-assets>
 
     <!--GORDON, ARDAMOY, RUENATA, DELOS SANTOS-->
@@ -140,7 +125,7 @@ AFRAME.registerComponent('markerhandler', {
     </a-marker>
 
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
-    <a-marker markerhandler cursor="rayOrigin: mouse" emitevents="true" type="barcode" value="1" id="text-sound">
+    <a-marker soundhandler cursor="rayOrigin: mouse" emitevents="true" type="barcode" value="1" id="text-sound">
       <a-entity
         rotation="-90 0 0"
         position="0 0 0"
@@ -149,6 +134,8 @@ AFRAME.registerComponent('markerhandler', {
         animation-mixer>
       </a-entity>
     </a-marker>
+	
+	<a-sound src="#sound"></a-sound>
 
     <!--QUILALA, MISSION, JALIPA ROCHEL, PERIA-->
     <a-marker type="barcode" value="11">

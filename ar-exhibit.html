@@ -152,7 +152,9 @@ var playing = false;
       </a-entity>
     </a-marker>
 
+    <a-text font="exo2bold" look-at="[gps-new-camera]" gps-new-entity-place="latitude: 10.7945937; longitude: 122.0090297;" scale="50 50 50" value="This way to AR Exhibit!" align="center"></a-text>
+
     <!-- Define the camera of the scene -->
-    <a-entity camera></a-entity>
+    <a-entity camera gps-new-camera='gpsMinDistance: 5'></a-entity>
   </a-scene>
 </body>

@@ -14,18 +14,18 @@
         init: function () {
             this.soundEl = document.querySelector('[sound]');
             this.marker = document.querySelector('#text-sound');
-            this.visible = false;
+            this.marker.visible = false;
         },
         tick: function () {
 
             if (this.marker.object3D.visible && !this.visible) {
-                console.log("ding")
+                console.log("Sound is playing")
                 //this.soundEl.components.sound.stopSound(); // stop if playing
                 this.soundEl.components.sound.playSound(); // play
                 this.visible = true; // make sure it plays only once per visible
             } else if (!this.marker.object3D.visible) {
 				this.soundEl.components.sound.pauseSound();
-                this.visible = false;
+                this.marker.visible = false;
             }
         }
     });
@@ -117,8 +117,7 @@
         gltf-model="#fish"
         rotation="90 180 0"
         scale=".5 .5 .5"
-        position="0 0 0"
-        animation-mixer>
+        position="0 0 0">
       </a-entity>
     </a-marker>
 

@@ -11,17 +11,10 @@
   <!--<script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>-->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const scene = document.querySelector('a-scene');
-    const splash = document.querySelector('#splash');
-    const loading = document.querySelector('#splash .loading');
-    const text = document.querySelector('#splash .loading-text');
-
- scene.addEventListener('loaded', function (e) {
-        setTimeout(() => {
-            loading.style.display = 'none';
-            text.style.display = 'none';
-            splash.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
-        }, 50);
+    var scene = document.querySelector('a-scene');
+    var splash = document.querySelector('#splash');
+    scene.addEventListener('loaded', function (e) {
+        splash.style.display = 'none';
     });
 });
 
@@ -52,21 +45,6 @@ var playing = false;
     });
 </script>
 <style>
- body, html {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background-color: #232323;
-}
-
-body.AR-container {
-  margin : 0px; 
-  overflow: hidden;
-  background-color: none;
-}
-
 #splash {
   position: fixed;
   z-index: 99999;

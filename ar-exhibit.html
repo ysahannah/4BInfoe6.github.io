@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
-/*var playing = false;
+var playing = false;
 
     AFRAME.registerComponent('soundhandler', {
         init: function () {
@@ -34,14 +34,14 @@
 				playing = false;
             }
         }
-    });*/
+    });
 </script>
 </head>
 
 <body style="margin: 0px; overflow: hidden">
   <a-scene
     embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" soundhandler>
     <!--NAIG, SIACOR, ESTANOL, MAGALLANO-->
     <a-marker type="barcode" value="16">
       <a-image
@@ -66,7 +66,7 @@
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
     <a-assets>
       <a-asset-item id="text" src="Airone/asset/Model.glb"></a-asset-item>
-      <audio id="sound" src="Airone/audio.mp3" preload="auto"></audio>
+      <audio id="sound" src="Airone/audio.mp3"></audio>
     </a-assets>
 
     <!--GORDON, ARDAMOY, RUENATA, DELOS SANTOS-->

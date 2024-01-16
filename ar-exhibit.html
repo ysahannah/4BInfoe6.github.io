@@ -10,27 +10,28 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
-//To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
 var playing = false;
 
     AFRAME.registerComponent('soundhandler', {
         init: function () {
             this.soundEl = document.querySelector('[sound]');
-            //this.marker = document.querySelector('#text-sound');
-			
-			// Set up the tick throttling. Will check if marker is active every 500ms
+            this.marker = document.querySelector('#text-sound');
+            //this.visible = false;
 			this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
+			
         },
         tick: function () {
 
-            if (document.querySelector("#text-sound").object3D.visible == true && playing == false) {
+            if (this.marker.object3D.visible && playing == false) {
+                console.log("Audio is playing")
                 //this.soundEl.components.sound.stopSound(); // stop if playing
                 this.soundEl.components.sound.playSound(); // play
                 //this.visible = true; // make sure it plays only once per visible
-				playing = true;				
-                console.log("Sound is playing")
+				playing = true;
             } else if (!this.marker.object3D.visible) {
 				this.soundEl.components.sound.pauseSound();
+                //this.visible = false;
+				playing = false;
             }
         }
     });
@@ -40,7 +41,7 @@ var playing = false;
 <body style="margin: 0px; overflow: hidden">
   <a-scene
     embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" soundhandler>
     <!--NAIG, SIACOR, ESTANOL, MAGALLANO-->
     <a-marker type="barcode" value="16">
       <a-image
@@ -127,7 +128,7 @@ var playing = false;
     </a-marker>
 
     <!--VILLASOR, DAVA, CONSTANTINO, BRANTA-->
-    <a-marker type="barcode" value="1" id="text-sound" soundhandler>
+    <a-marker type="barcode" value="1" id="text-sound">
       <a-entity
         rotation="-90 0 0"
         position="0 0 0"

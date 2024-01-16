@@ -10,22 +10,28 @@
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
 
 <script>
+var playing = false;
+
     AFRAME.registerComponent('soundhandler', {
         init: function () {
             this.soundEl = document.querySelector('[sound]');
             this.marker = document.querySelector('#text-sound');
-            this.visible = false;
+            //this.visible = false;
+			this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
+			
         },
         tick: function () {
 
-            if (this.marker.object3D.visible && !this.visible) {
-                console.log("ding")
+            if (this.marker.object3D.visible && playing == false) {
+                console.log("Audio is playing")
                 //this.soundEl.components.sound.stopSound(); // stop if playing
                 this.soundEl.components.sound.playSound(); // play
-                this.visible = true; // make sure it plays only once per visible
+                //this.visible = true; // make sure it plays only once per visible
+				playing = true;
             } else if (!this.marker.object3D.visible) {
 				this.soundEl.components.sound.pauseSound();
-                this.visible = false;
+                //this.visible = false;
+				playing = false;
             }
         }
     });
@@ -117,8 +123,7 @@
         gltf-model="#fish"
         rotation="90 180 0"
         scale=".5 .5 .5"
-        position="0 0 0"
-        animation-mixer>
+        position="0 0 0">
       </a-entity>
     </a-marker>
 

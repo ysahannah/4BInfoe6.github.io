@@ -41,6 +41,7 @@ var playing = false;
 <body style="margin: 0px; overflow: hidden">
   <a-scene
     embedded
+    renderer="logarithmicDepthBuffer: true;"
     arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" soundhandler>
     <!--NAIG, SIACOR, ESTANOL, MAGALLANO-->
     <a-marker type="barcode" value="16">
